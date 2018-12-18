@@ -16,4 +16,4 @@ with open(sys.argv[1]) as infile:
     else:
       [lstart, lstop, lperiod, rstart, rstop, rperiod, loop, pcmatches, pcindels, score, pcAT, pcGC, pcATpair, pcGCpair, pcGTpair, ctr2, av_ctr2, lseq, rseq] = ele
       bed_line = [seq_name, lstart, rstop]
-      print '\t'.join(bed_line)
+      print('\t'.join(bed_line))

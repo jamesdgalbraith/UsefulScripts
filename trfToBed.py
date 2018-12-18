@@ -19,5 +19,4 @@ with open(sys.argv[1]) as infile:
              align_score, perc_A, perc_C, perc_G, perc_T, 
              entropy, cons_seq, repeat_seq, left_flank, right_flank] = ele
       bed_line = [seq_name, start, stop]
-      print '\t'.join(bed_line)
-
+      print('\t'.join(bed_line))

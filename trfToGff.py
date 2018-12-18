@@ -20,4 +20,4 @@ with open(sys.argv[1]) as infile:
              entropy, cons_seq, repeat_seq, left_flank, right_flank] = ele
       gff_line = [seq_name, 'trf', 'repeat',
                         start, stop, '.', '.', '.', 'Size=' + consensus_size + '; Name='+ cons_seq + '; copies=' + copies]
-      print '\t'.join(gff_line)
+      print('\t'.join(gff_line))
