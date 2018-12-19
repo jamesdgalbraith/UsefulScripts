@@ -13,7 +13,7 @@ with open(sys.argv[1]) as infile:
     if line.startswith('@'):
       seq_name = ele[0][1:]
     # Print sequence name and select other columns for other lines
-    else:
+    elif ele[0].isdigit():
       [start, stop, period, copies, 
              consensus_size, perc_match, perc_indels, 
              align_score, perc_A, perc_C, perc_G, perc_T, 
