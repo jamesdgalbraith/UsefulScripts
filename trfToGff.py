@@ -1,23 +1,38 @@
-# adapted from https://gist.github.com/lexnederbragt/3689ee2301493c34c8ab#file-trf2gff-py
+from argparse import ArgumentParser
 
-# Library  needed for dealing with system
-import sys
+def parse_args():
+    "Parse the input arguments, use '-h' for help"
+    parser = ArgumentParser(description='Convert Tandem Repeat Finder (TRF) dat file to bed format with repeat units for microsatellite genotyping')
+    parser.add_argument(
+        '-i', '--trf', type=str, required=True,
+        help='Input file produced by Tandem Repeat Finder (TRF)')
+    parser.add_argument(
+        '-o', '--out', type=str, required=True,
+        help='{Path to output GFF}')
 
-# Open file
-with open(sys.argv[1]) as infile:
-  # All below loops over file
-  for line in infile:
-    # Split input into columns based on spaces
-    ele = line.strip().split(" ")
-    # Grab sequence name from lines beginning with "@"
-    if line.startswith('@'):
-      seq_name = ele[0][1:]
-    # Print sequence name and select other columns for other lines
-    else:
-      [start, stop, period, copies, 
-             consensus_size, perc_match, perc_indels, 
-             align_score, perc_A, perc_C, perc_G, perc_T, 
-             entropy, cons_seq, repeat_seq, left_flank, right_flank] = ele
-      gff_line = [seq_name, 'trf', 'repeat',
-                        start, stop, '.', '.', '.', 'Size=' + consensus_size + '; Name='+ cons_seq + '; copies=' + copies]
-      print('\t'.join(gff_line))
+    return parser.parse_args() 
+
+def main():
+    # Parse command line arguments
+    args = parse_args()
+    trffile = args.trf
+    outfile = args.out
+
+    with open(outfile, 'w') as out:
+        chrom = ""
+        with open(trffile, 'r') as trf:
+            for line in trf:
+                splitline = line.split()
+                if line.startswith("@"):
+                    chrom = line.split()[0][1:]
+                else:
+                    start = splitline[0]
+                    end = splitline[1]
+                    period = splitline[2]
+                    count = splitline[3]
+                    score = splitline[7]
+                    ssr = splitline[13]
+                    out.write('\t'.join([chrom,"TRF", "Simple_repeat", start,end,score,".",".",'Period='+period+';Count='+count+';Consensus='+ssr]) + '\n')
+
+if __name__ == '__main__':
+    main()
