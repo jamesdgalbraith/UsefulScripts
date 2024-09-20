@@ -12,9 +12,9 @@ def argsParser():
     parser.add_argument('-w', '--window_size', type=int, default=100000,
                         help='Window size')
     args = parser.parse_args()
-    return(args.in_vcf, args.min_depth, args.max_depth, args.out_tsv, args.window_size, args.error_out)
+    return(args.in_vcf, args.min_depth, args.max_depth, args.out_tsv, args.window_size)
 
-def site_counter(in_vcf, out_txt, min_depth, max_depth, binning_width, error_out):
+def site_counter(in_vcf, out_txt, min_depth, max_depth, binning_width):
     from math import floor
     from re import sub
     with open(out_txt, 'w') as txt_out:
