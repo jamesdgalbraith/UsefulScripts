@@ -54,7 +54,7 @@ def sum_maj_min(in_vcf, out_txt, min_depth, max_depth, window_size):
                             sum_maj, sum_min, n, sum_tot = 0, 0, 0, 0
                             
                         # Check depth and if in required scaffolds if good write to file
-                        depth_list = metadata["DP4"].split(',')
+                        depth_list = sub("\n", "", metadata["DP4"].split(','))
                         ref_n = int(depth_list[0])+int(depth_list[1])
                         alt_n = int(depth_list[2])+int(depth_list[3])
                         
