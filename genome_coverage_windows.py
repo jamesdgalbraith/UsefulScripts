@@ -30,8 +30,9 @@ with open(args.out, "w") as o:
             if contig != delim[0]:
                 # Calculate contig position, calculate mean coverage, write to file
                 contig_position = int((current_contig_position//window_size)*window_size + window_size/2 )
-                mean_coverage = round(coverage_count/(current_contig_position%window_size), 2)
-                o.write("\t".join([contig, str(contig_position), str(mean_coverage)+"\n"])) 
+                if current_contig_position%window_size > 0:
+                    mean_coverage = round(coverage_count/(current_contig_position%window_size), 2)
+                    o.write("\t".join([contig, str(contig_position), str(mean_coverage)+"\n"])) 
                 # Reset contig name, counter and position
                 contig = delim[0] # SET NEW CONTIG NAME
                 coverage_count = int(delim[2]) # RESET COVERAGE
