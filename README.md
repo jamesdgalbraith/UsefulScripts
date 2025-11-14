@@ -5,8 +5,11 @@
 
 python trfToGff.py -i </path/to/trf/ngs/output> -o </path/to/out.gff>
 
-**irfRoBed.py** converts the -ngs output of Inverted Repeat Finder to BED format. For example:
+**irfToBed.py** converts the -ngs output of Inverted Repeat Finder to BED format. For example:
 python irfToBed.py <irf_output> > irf.bed
+
+**mrepsToGff.py** converts the output of mreps to GFF and FASTA. For example:
+python mrepsToGff.py -i <mreps_output> -g </path/to/out.gff> -f </path/to/out.fasta>
 
 ## Calculators: for calculating various statistics
 ### Heterozygosity
